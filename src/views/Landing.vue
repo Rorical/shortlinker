@@ -111,8 +111,8 @@
 
 						}).catch(function(error) {
 							console.log(error)
-							this.$message.error('网络错误!')
-							this.buttonError('错误')
+							that.$message.error('网络错误!')
+							that.buttonError('错误')
 						})
 					} else {
 						this.buttonNoraml()
