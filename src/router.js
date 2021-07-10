@@ -18,6 +18,6 @@ const routes = [
 
 export default new VueRouter({
 	linkExactActiveClass: 'active',
-	mode: 'history',
+	mode: 'hash',
 	routes
 });

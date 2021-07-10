@@ -153,12 +153,11 @@
 					return
 				}
 				this.buttonLoading()
-
+				this.finalLink = ""
 				this.$refs.captcha.execute()
 			},
-			convert(token, eKey) {
-				console.log(token)
-				console.log(eKey)
+			convert(token) {
+				this.loading = true
 				var that = this
 
 
@@ -170,9 +169,6 @@
 					console.log(response.data)
 					if (response.data["code"] == 0) {
 						that.finalLink = that.shortLink + that.short
-
-						that.buttonNoraml()
-						that.buttonDisable()
 					} else if (response.data["code"] == 1) {
 						that.$message.error('短链接已经被占用!')
 						that.buttonError('错误')
@@ -180,10 +176,12 @@
 						that.$message.error('验证失败!')
 						that.buttonError('错误')
 					}
+					that.loading = false
 				}).catch(function(error) {
 					console.log(error)
 					that.$message.error('网络错误!')
 					that.buttonError('错误')
+					that.loading = false
 				})
 
 
