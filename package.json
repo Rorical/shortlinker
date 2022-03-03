@@ -11,6 +11,7 @@
     "@hcaptcha/vue-hcaptcha": "^0.3.0",
     "@pwp-app/better-element-ui": "^2.15.1-prev-2",
     "axios": "^0.21.1",
+    "clipboard": "^2.0.10",
     "core-js": "^3.6.5",
     "crypto-js": "^4.0.0",
     "element-ui": "^2.15.1",
