@@ -101,6 +101,7 @@ export default {
     }
   },
   mounted() {
+    document.getElementsByTagName("body")[0].setAttribute("style","background-image: url(\"https://api.daihan.top/api/acg\");")
     this.clipboard = new ClipboardJS('#copy')
     this.clipboard.on("success", () => {
       this.$message({
@@ -117,11 +118,26 @@ export default {
   },
   beforeDestroy() {
     this.clipboard.destroy()
+    document.getElementsByTagName("body")[0].setAttribute("style","")
   }
 }
 </script>
 
 <style lang="scss">
+body {
+  background-attachment: scroll;
+  background-repeat: no-repeat;
+  background-position: 50%;
+  background-size: cover;
+  min-height: 100vh;
+  padding: 0;
+  margin: 0;
+}
+
+::selection {
+  background-color: rgba(0,0,0,0.1);
+}
+
 .card {
   box-shadow: 0 2px 12px 0 rgba(0, 0, 0, 0.1);
   height: auto;
@@ -163,20 +179,5 @@ export default {
       padding: 0;
     }
   }
-}
-
-body {
-  background-attachment: scroll;
-  background-repeat: no-repeat;
-  background-position: 50%;
-  background-size: cover;
-  background-image: url("https://api.daihan.top/api/acg");
-  min-height: 100vh;
-  padding: 0;
-  margin: 0;
-}
-
-::selection {
-  background-color: rgba(0,0,0,0.1);
 }
 </style>
