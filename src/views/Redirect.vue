@@ -15,11 +15,19 @@ export default {
     }
   },
   methods: {
+    isHeadLess() {
+      let ua = window.navigator.userAgent
+      if (ua.includes("HeadlessChrome") || navigator.languages === []) {
+        return true
+      }
+    },
     isBlockedUA() {
-      let ua = ua = window.navigator.userAgent
+      let ua = window.navigator.userAgent
       if (ua !== null) {
         ua = ua.toLowerCase()
         if (ua.indexOf("tencent") != -1 || ua.indexOf("qq") != -1 || ua.indexOf("micromessenger") != -1 || ua.indexOf("ucbrowser") != -1 || ua.indexOf("ubrowser") != -1 || ua.indexOf("baidu") != -1 || ua.indexOf("quark") != -1 || ua.indexOf("sogou") != -1 || ua.indexOf("sogou") != -1) {
+          return true
+        } else if (this.isHeadLess()){
           return true
         }
       }
@@ -28,13 +36,14 @@ export default {
     redirect(url) {
       if (this.isBlockedUA()) {
         this.loading.close()
-        this.$router.replace({ path: "/info", params: {url} })
+        this.$router.replace({ name: "Info", params: {url} })
       } else {
         window.location.assign(url)
       }
     },
   },
   mounted() {
+
     this.loading = this.$loading({
       lock: true,
       text: '正在前往目的地页面',

@@ -1,6 +1,6 @@
 <template>
 	<el-container id="app">
-		<Header v-show="$route.path!='/shit'" />
+		<Header v-show="$route.path!='/info'" />
 		<transition name="el-fade-in" mode="out-in">
 			<router-view></router-view>
 		</transition>
