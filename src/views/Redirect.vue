@@ -27,6 +27,7 @@ export default {
     },
     redirect(url) {
       if (this.isBlockedUA()) {
+        this.loading.close()
         this.$router.replace({ path: "/info", params: {url} })
       } else {
         window.location.assign(url)
@@ -39,13 +40,14 @@ export default {
       text: '正在前往目的地页面',
     })
     this.axios.get(this.api + "/api/short/" + this.id).then(response => {
-      this.loading.close()
       if (response.data["code"] == 0) {
         this.redirect(response.data["data"]["to"])
       } else if (response.data["code"] == 1) {
         this.$message.error('目的地不存在！')
+        this.loading.close()
       } else{
         this.$message.error('未知错误！')
+        this.loading.close()
       }
     }).catch(error => {
       console.log(error)
