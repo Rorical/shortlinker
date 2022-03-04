@@ -1,28 +1,31 @@
 import Vue from "vue";
 import VueRouter from "vue-router";
-import Landing from "@/views/Landing.vue";
-import About from "@/views/About.vue"
-import Redirect from '@/views/Redirect.vue'
 
 Vue.use(VueRouter);
 
 const routes = [
 	{
 		path: "/",
-		component: Landing
+		component: () => import("@/views/Landing.vue"),
 	},
 	{
 		path: "/about",
-		component: About
+		component: () => import("@/views/About.vue"),
 	},
 	{
-		path: "/shit",
-		component: Redirect
+		path: "/info",
+		component: () => import("@/views/Information.vue"),
+		props: true,
 	},
+	{
+		path: "*",
+		component: () => import("@/views/Redirect.vue"),
+	}
 ]
 
 export default new VueRouter({
 	linkExactActiveClass: 'active',
-	mode: 'hash',
+	base: process.env.BASE_URL,
+	mode: 'history',
 	routes
 });
