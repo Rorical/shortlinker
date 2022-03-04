@@ -14,22 +14,24 @@ export default {
       api: config.api
     }
   },
-  isBlockedUA() {
-    let ua = ua = window.navigator.userAgent
-    if (ua !== null) {
-      ua = ua.toLowerCase()
-      if (ua.indexOf("tencent") != -1 || ua.indexOf("qq") != -1 || ua.indexOf("micromessenger") != -1 || ua.indexOf("ucbrowser") != -1 || ua.indexOf("ubrowser") != -1 || ua.indexOf("baidu") != -1 || ua.indexOf("quark") != -1 || ua.indexOf("sogou") != -1 || ua.indexOf("sogou") != -1) {
-        return true
+  methods: {
+    isBlockedUA() {
+      let ua = ua = window.navigator.userAgent
+      if (ua !== null) {
+        ua = ua.toLowerCase()
+        if (ua.indexOf("tencent") != -1 || ua.indexOf("qq") != -1 || ua.indexOf("micromessenger") != -1 || ua.indexOf("ucbrowser") != -1 || ua.indexOf("ubrowser") != -1 || ua.indexOf("baidu") != -1 || ua.indexOf("quark") != -1 || ua.indexOf("sogou") != -1 || ua.indexOf("sogou") != -1) {
+          return true
+        }
       }
-    }
-    return false
-  },
-  redirect(url) {
-    if (this.isBlockedUA()) {
-      this.$router.replace({ path: "/info", params: {url} })
-    } else {
-      window.location.assign(url)
-    }
+      return false
+    },
+    redirect(url) {
+      if (this.isBlockedUA()) {
+        this.$router.replace({ path: "/info", params: {url} })
+      } else {
+        window.location.assign(url)
+      }
+    },
   },
   mounted() {
     this.loading = this.$loading({
