@@ -10,7 +10,7 @@ export default {
   data() {
     return {
       loading: null,
-      id: this.$route.path.split("/")[1],
+      id: this.$route.path.substring(1),
       api: config.api
     }
   },
@@ -48,6 +48,35 @@ export default {
       lock: true,
       text: '正在前往目的地页面',
     })
+
+    if (this.id.startsWith("pxi/")) {
+      try {
+        parseInt(this.id.substring(4))
+      } catch {
+        this.$message.error('不是一个正确的短链接！')
+        this.loading.close()
+        return
+      }
+      this.redirect("https://pixivel.moe/illust/" + this.id.substring(4))
+      return;
+    } else if (this.id.startsWith("pxu/")) {
+      try {
+        parseInt(this.id.substring(4))
+      } catch {
+        this.$message.error('不是一个正确的短链接！')
+        this.loading.close()
+        return
+      }
+      this.redirect("https://pixivel.moe/illustrator/" + this.id.substring(4))
+      return;
+    }
+
+    if (this.id.includes("/")) {
+      this.$message.error('不是一个正确的短链接！')
+      this.loading.close()
+      return
+    }
+
     this.axios.get(this.api + "/api/short/" + this.id).then(response => {
       if (response.data["code"] == 0) {
         this.redirect(response.data["data"]["to"])
